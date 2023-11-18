@@ -22,7 +22,8 @@ const ToggleButtonGroup = () => {
     console.log('connect');
     try {
       const accounts: any = await sdk?.connect();
-      console.log('accounts', accounts);
+      console.log('chainId', chainId)
+      console.log('accounts', accounts, connected);
       setAccount(accounts?.[0]);
     } catch (err) {
       console.warn(`failed to connect..`, err);

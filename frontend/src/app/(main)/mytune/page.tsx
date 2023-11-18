@@ -2,7 +2,7 @@
 
 import Button from '@/components/button/button';
 import { factoryAbi } from '@/utils/Abi';
-import { useSDK } from '@metamask/sdk-react';
+import { useSDK } from '@metamask/sdk-react-ui';
 import { useState } from 'react';
 import { writeContract, waitForTransaction } from 'wagmi/actions';
 import { useAccount } from 'wagmi';
@@ -79,7 +79,7 @@ export default function MyTune() {
     console.log('connect');
     try {
       const accounts: any = await sdk?.connect();
-      console.log('accounts', accounts);
+      console.log('accounts', accounts, 'wft', connected);
     } catch (err) {
       console.warn(`failed to connect..`, err);
     }
