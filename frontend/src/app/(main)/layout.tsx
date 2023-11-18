@@ -13,7 +13,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         checkInstallationImmediately: false,
         dappMetadata: {
           name: 'Demo React App',
-          url: window?.location?.host,
+          url: typeof window !== 'undefined' ? window.location.host : undefined,
         },
       }}
     >

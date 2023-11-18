@@ -2,22 +2,34 @@
 
 import { useState } from 'react';
 
-// Dummy data
+// Liked tracks with more realistic song names and artist names
 const likedTracks = [
-  { id: 1, name: 'Track name', artist: 'Artist name', movement: 3 },
-  { id: 2, name: 'Track name', artist: 'Artist name', movement: 12 },
+  { id: 1, name: 'Dark Realize Protect', artist: 'Logan Benton', movement: 3 },
+  { id: 2, name: 'Only May Mr', artist: 'Diane Thomas', movement: 12 },
   // ... other tracks
 ];
 
+// Supported artists with more realistic artist names
 const supportedArtists = [
-  { id: 1, name: 'Artist name' },
-  { id: 2, name: 'Artist name' },
+  { id: 1, name: 'Brian Mcdonald' },
+  { id: 2, name: 'Bradley Graham' },
   // ... other artists
 ];
 
+// Registered events with more realistic event names and descriptions
 const registeredEvents = [
-  { id: 1, name: 'Event name', description: 'Description here', heartsUsed: 23 },
-  { id: 2, name: 'Event name', description: 'Description here', heartsUsed: 31 },
+  {
+    id: 1,
+    name: 'Didactic Implementation',
+    description: 'Within itself agent center check operation much.',
+    heartsUsed: 23,
+  },
+  {
+    id: 2,
+    name: 'Asynchronous Conglomeration',
+    description: 'Culture group certain.',
+    heartsUsed: 31,
+  },
   // ... other events
 ];
 
