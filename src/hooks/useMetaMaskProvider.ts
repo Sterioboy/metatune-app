@@ -13,7 +13,7 @@ function useMetaMaskProvider() {
 
         if (provider) {
           // Check if the detected provider is the same as window.ethereum
-          if (provider !== window.ethereum) {
+          if (provider !== window?.ethereum) {
             console.error('Do you have multiple wallets installed?');
           }
           setMetaMaskProvider(provider);
