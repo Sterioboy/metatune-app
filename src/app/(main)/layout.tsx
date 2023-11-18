@@ -1,21 +1,27 @@
 'use client';
 
 import Navbar from '@/components/navbar/navbar';
-import useChainChangeHandler from '@/hooks/useChainChangeHandler';
-import { MetaMaskUIProvider } from '@metamask/sdk-react-ui';
+import { MetaMaskProvider } from '@metamask/sdk-react';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   /* useChainChangeHandler(); */
 
   return (
-    <MetaMaskUIProvider
+    <MetaMaskProvider
+      debug={true}
       sdkOptions={{
+        checkInstallationImmediately: false,
         dappMetadata: {
-          name: 'Demo UI React App',
+          name: 'Demo React App',
+          url: window.location.host,
         },
       }}
     >
-      <main className="flex flex-col min-h-screen p-[20px]">{children}</main>
-    </MetaMaskUIProvider>
+      <main className="flex flex-col min-h-screen p-[20px]">
+        <Navbar />
+
+        {children}
+      </main>
+    </MetaMaskProvider>
   );
 }

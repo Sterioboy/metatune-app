@@ -5,16 +5,19 @@ import { useState } from 'react';
 // Dummy data
 const likedTracks = [
   { id: 1, name: 'Track name', artist: 'Artist name', movement: 3 },
+  { id: 2, name: 'Track name', artist: 'Artist name', movement: 12 },
   // ... other tracks
 ];
 
 const supportedArtists = [
   { id: 1, name: 'Artist name' },
+  { id: 2, name: 'Artist name' },
   // ... other artists
 ];
 
 const registeredEvents = [
   { id: 1, name: 'Event name', description: 'Description here', heartsUsed: 23 },
+  { id: 2, name: 'Event name', description: 'Description here', heartsUsed: 31 },
   // ... other events
 ];
 
@@ -55,15 +58,15 @@ export default function MyTune() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="flex h-full w-full flex-col gap-6">
-      <h1 className="text-2xl font-bold mb-4">My tune</h1>
+    <div className="flex h-full w-full flex-col gap-3">
+      <h1 className="text-2xl font-bold mb-2">My tune</h1>
       <div className="flex justify-around">
         <StatCard number={30} label="Liked" />
         <StatCard number={102} label="Heart tokens" />
         <StatCard number={5} label="Artist Supporting" />
       </div>
       <section>
-        <h2 className="text-xl font-semibold my-4">Registered events</h2>
+        <h2 className="text-xl font-semibold my-2">Registered events</h2>
         {registeredEvents.map((event) => (
           <EventItem key={event.id} {...event} />
         ))}

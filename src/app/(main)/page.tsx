@@ -1,14 +1,16 @@
 'use client';
 
-import Navbar from '@/components/navbar/navbar';
 import Link from 'next/link';
 
 // You would typically fetch this data from a backend or state management store
 const leaderboardData = [
   { id: 1, trackName: 'Track name', artistName: 'Artist name', movement: 3 },
-  { id: 2, trackName: 'Track name', artistName: 'Artist name', movement: -3 },
+  { id: 2, trackName: 'Track name', artistName: 'Artist name', movement: -1 },
   { id: 3, trackName: 'Track name', artistName: 'Artist name', movement: 0 },
   { id: 4, trackName: 'Track name', artistName: 'Artist name', movement: -2 },
+  { id: 5, trackName: 'Track name', artistName: 'Artist name', movement: +1 },
+  { id: 6, trackName: 'Track name', artistName: 'Artist name', movement: +4 },
+  { id: 7, trackName: 'Track name', artistName: 'Artist name', movement: -1 },
 ];
 
 const LeaderboardItem = ({ rank, trackName, artistName, movement }: any) => {
@@ -34,8 +36,6 @@ const LeaderboardItem = ({ rank, trackName, artistName, movement }: any) => {
 export default function Leaderboard() {
   return (
     <div>
-      <Navbar />
-
       <h2 className="text-center text-2xl font-bold mb-4">Leaderboard</h2>
       <div>
         {leaderboardData.map((item, index) => (
