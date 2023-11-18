@@ -67,18 +67,12 @@ const ToggleButtonGroup = () => {
       <IDKitWidget
         action="sign_in"
         signal="test_signal"
-        onError={(error) => console.log(error)}
-        onSuccess={(response) => console.log(response)}
+        onSuccess={(response: any) => console.log(response)}
         app_id="app_staging_99b19f7d40189390b56c8ff1d12f6881"
       >
         {({ open }) => (
           <button
-            onClick={() => {
-              setActive('WorldID');
-
-              connect();
-              open();
-            }}
+            onClick={open}
             className={`text-sm px-4 py-2 rounded-full ${
               active === 'WorldID' ? 'bg-white text-gray-800 shadow' : 'bg-slate-200 text-gray-600'
             } focus:outline-none`}

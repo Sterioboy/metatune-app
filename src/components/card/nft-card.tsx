@@ -1,4 +1,4 @@
-import Card from 'components/card/card';
+import Card from './card';
 
 const NftCard = (props: {
   image: string;

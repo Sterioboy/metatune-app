@@ -73,7 +73,7 @@ export default function MyTune() {
       </section>
       <section>
         <h2 className="flex justify-between items-center text-xl font-semibold my-4">
-          You liked{' '}
+          You liked
           <a href="/liked" className="text-sm">
             View all
           </a>
@@ -84,7 +84,7 @@ export default function MyTune() {
       </section>
       <section>
         <h2 className="flex justify-between items-center text-xl font-semibold my-4">
-          You've supported{' '}
+          You have supported
           <a href="/supported" className="text-sm">
             View all
           </a>

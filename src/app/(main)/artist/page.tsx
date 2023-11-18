@@ -1,8 +1,6 @@
 'use client';
 
 import Card from '@/components/card/card';
-import Link from 'next/link';
-import Image from 'next/image';
 
 import { useState } from 'react';
 import Loader from '@/components/loader/loader';
@@ -10,6 +8,7 @@ import Button from '@/components/button/button';
 import EventCard from '@/components/card/event-card';
 
 export default function Artist() {
+  const [showPlayer, setShowPlayer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -65,10 +64,9 @@ export default function Artist() {
             <>
               <Card
                 extra="items-center flex-col w-[118px] min-w-[118px] h-[118px] p-1 bg-cover cursor-pointer"
-                /* onClick={() => {
-                  dispatch(setAudioIndex(0));
-                  dispatch(setIsStartListen(true));
-                }} */
+                onClick={() => {
+                  setShowPlayer(true);
+                }}
               >
                 <div
                   className="relative flex h-full w-full justify-center items-center rounded-[16px] bg-cover bg-clip-border"
@@ -80,10 +78,9 @@ export default function Artist() {
 
               <Card
                 extra="items-center flex-col w-[118px] min-w-[118px] h-[118px] p-1 bg-cover cursor-pointer"
-                /* onClick={() => {
-                  dispatch(setAudioIndex(1));
-                  dispatch(setIsStartListen(true));
-                }} */
+                onClick={() => {
+                  setShowPlayer(true);
+                }}
               >
                 <div
                   className="relative flex h-full w-full justify-center items-center rounded-[16px] bg-cover bg-clip-border"
@@ -93,10 +90,9 @@ export default function Artist() {
 
               <Card
                 extra="items-center flex-col w-[118px] min-w-[118px] h-[118px] p-1 bg-cover cursor-pointer"
-                /* onClick={() => {
-                    dispatch(setAudioIndex(2));
-                    dispatch(setIsStartListen(true));
-                  }} */
+                onClick={() => {
+                  setShowPlayer(true);
+                }}
               >
                 <div
                   className="relative flex h-full w-full justify-center items-center rounded-[16px] bg-cover bg-clip-border"
@@ -107,6 +103,15 @@ export default function Artist() {
               </Card>
             </>
           )}
+
+          {/* {showPlayer && (
+            <div className="w-full mt-3">
+              <audio className="w-full" controls>
+                <source src="sound/test-track.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )} */}
         </div>
       </div>
 
