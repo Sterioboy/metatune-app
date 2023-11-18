@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Loader from '@/components/loader/loader';
 import Button from '@/components/button/button';
 import EventCard from '@/components/card/event-card';
+import LikeButton from '@/components/button/like-button';
 
 export default function Artist() {
   const [showPlayer, setShowPlayer] = useState(false);
@@ -73,7 +74,9 @@ export default function Artist() {
                   style={{
                     backgroundImage: `url(img/nfts/NFT-2.jpg)`,
                   }}
-                />
+                >
+                  <LikeButton />
+                </div>
               </Card>
 
               <Card
@@ -85,7 +88,9 @@ export default function Artist() {
                 <div
                   className="relative flex h-full w-full justify-center items-center rounded-[16px] bg-cover bg-clip-border"
                   style={{ backgroundImage: `url(img/nfts/NFT-4.jpg)` }}
-                />
+                >
+                  <LikeButton />
+                </div>
               </Card>
 
               <Card
@@ -99,7 +104,9 @@ export default function Artist() {
                   style={{
                     backgroundImage: `url(img/nfts/NFT-3.jpg)`,
                   }}
-                />
+                >
+                  <LikeButton />
+                </div>
               </Card>
             </>
           )}
@@ -121,7 +128,7 @@ export default function Artist() {
         <h2 className="mb-1 text-navy-700 text-2xl font-bold dark:text-white">1 Upcoming Event</h2>
 
         <div className="flex gap-3 overflow-x-auto py-3">
-          <EventCard eventName="Event Name" description="Description" heartsRequired={40} />
+          <EventCard eventName="Q&A With Fans" description="Live Q&A Session" heartsRequired={40} />
         </div>
       </div>
     </div>
