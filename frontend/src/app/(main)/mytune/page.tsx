@@ -1,5 +1,7 @@
 'use client';
 
+import Button from '@/components/button/button';
+import { useSDK } from '@metamask/sdk-react';
 import { useState } from 'react';
 
 // Liked tracks with more realistic song names and artist names
@@ -33,7 +35,7 @@ const registeredEvents = [
   // ... other events
 ];
 
-const StatCard = ({ number, label }: any) => (
+const StatCard = ({ number, label, mint }: any) => (
   <div className="w-full text-center flex flex-col items-center justify-center py-4 shadow-lg rounded-lg m-2">
     <div className="text-xl font-semibold">{number}</div>
     <div className="text-sm text-gray-500">{label}</div>
@@ -69,14 +71,46 @@ const EventItem = ({ name, description, heartsUsed }: any) => (
 export default function MyTune() {
   const [isLoading, setIsLoading] = useState(false);
 
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
+
+  const connect = async () => {
+    console.log('connect');
+    try {
+      const accounts: any = await sdk?.connect();
+      console.log('accounts', accounts);
+    } catch (err) {
+      console.warn(`failed to connect..`, err);
+    }
+  };
+
+  function handleMintTokens() {
+    if (!connected) {
+      alert('Please connect your wallet first!');
+      return;
+    }
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }
+
   return (
     <div className="flex h-full w-full flex-col gap-3">
       <h1 className="text-2xl font-bold mb-2">My tune</h1>
-      <div className="flex justify-around">
-        <StatCard number={30} label="Liked" />
-        <StatCard number={102} label="Heart tokens" />
-        <StatCard number={5} label="Artist Supporting" />
+      <div className="flex flex-col">
+        <div className="flex justify-around">
+          <StatCard number={30} label="Liked" />
+          <StatCard number={102} label="Heart tokens" mint />
+          <StatCard number={5} label="Artist Supporting" />
+        </div>
+
+        <Button variant="primary" extra="mt-2 text-sm" onClick={handleMintTokens}>
+          {connected ? 'Mint Tokens' : 'Connect Wallet'}
+        </Button>
       </div>
+
       <section>
         <h2 className="text-xl font-semibold my-2">Registered events</h2>
         {registeredEvents.map((event) => (
