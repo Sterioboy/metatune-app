@@ -3,11 +3,6 @@
 import Button from '@/components/button/button';
 import { factoryAbi } from '@/utils/Abi';
 import { useSDK } from '@metamask/sdk-react-ui';
-<<<<<<< HEAD
-=======
-import { useState } from 'react';
-import { writeContract, waitForTransaction } from 'wagmi/actions';
->>>>>>> 383b71e8e29815b369354715a38151e35d17efcd
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
 
