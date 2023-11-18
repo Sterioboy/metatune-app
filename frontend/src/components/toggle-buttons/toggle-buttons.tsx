@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSDK } from '@metamask/sdk-react';
+import { useSDK } from '@metamask/sdk-react-ui';
 import Link from 'next/link';
 import { IDKitWidget } from '@worldcoin/idkit';
 

@@ -2,10 +2,9 @@
 
 import Button from '@/components/button/button';
 import { factoryAbi } from '@/utils/Abi';
-import { useSDK } from '@metamask/sdk-react';
-import { useState } from 'react';
-import { writeContract, waitForTransaction } from 'wagmi/actions';
+import { useSDK } from '@metamask/sdk-react-ui';
 import { useAccount } from 'wagmi';
+import { useState } from 'react';
 
 // Liked tracks with more realistic song names and artist names
 const likedTracks = [
@@ -73,32 +72,22 @@ const EventItem = ({ name, description, heartsUsed }: any) => (
 
 export default function MyTune() {
   const { sdk, connected, connecting, provider, chainId } = useSDK();
-  const { address, isError, isLoading } = useAccount();
 
-  const connect = async () => {
-    console.log('connect');
-    try {
-      const accounts: any = await sdk?.connect();
-      console.log('accounts', accounts);
-    } catch (err) {
-      console.warn(`failed to connect..`, err);
-    }
-  };
+  const { address, isConnecting, isDisconnected } = useAccount();
 
   async function handleMintTokens() {
     if (!connected) {
       alert('Please connect your wallet first!');
       return;
     }
-
-    console.log('account', address);
+    console.log('address', address);
 
     /* const name = 'MetaTune';
     const { hash } = await writeContract({
       address: '0x71cAd28C784BD5C058E229C78A1D45703d37e13d',
       abi: factoryAbi,
       functionName: 'createToken',
-      args: [, 'SRH', 100],
+      args: [accounts[0], 100],
     });
     const data = await waitForTransaction({ hash });
     console.log(data); */

@@ -1,53 +1,40 @@
 'use client';
 
 import Navbar from '@/components/navbar/navbar';
-import { MetaMaskProvider } from '@metamask/sdk-react';
-import { createConfig, configureChains, WagmiConfig } from 'wagmi';
-
-import { lineaTestnet } from 'wagmi/chains';
+import { MetaMaskButton, MetaMaskUIProvider } from '@metamask/sdk-react-ui';
+import { lineaTestnet } from '@wagmi/core/chains';
+import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 
-/* const { chains, publicClient, webSocketPublicClient } = configureChains([lineaTestnet], [publicProvider()]);
+const { chains, publicClient } = configureChains([lineaTestnet], [publicProvider()]);
 
 const config = createConfig({
   autoConnect: true,
-  connectors: [new MetaMaskConnector()],
   publicClient,
-  webSocketPublicClient,
-}); */
-
-const config = createConfig({
-  autoConnect: true,
-  publicClient: createPublicClient({
-    chain: mainnet,
-    transport: http(),
-  }),
 });
-
-const client = createClient();
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   /* useChainChangeHandler(); */
+  const sdkOptions = {
+    logging: { developerMode: false },
+    checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
+    dappMetadata: {
+      name: 'Demo React App',
+      url: window.location.host,
+    },
+  };
 
   return (
-    <WagmiConfig client={client}>
-      <MetaMaskProvider
-        debug={true}
-        sdkOptions={{
-          checkInstallationImmediately: false,
-          dappMetadata: {
-            name: 'Demo React App',
-            url: typeof window !== 'undefined' ? window.location.host : undefined,
-          },
-        }}
-      >
+    <WagmiConfig config={config}>
+      <MetaMaskUIProvider debug={true} sdkOptions={sdkOptions} networks={chains}>
         <main className="flex flex-col min-h-screen p-[20px]">
           <Navbar />
 
+          <MetaMaskButton theme="light" color="white" />
+
           {children}
         </main>
-      </MetaMaskProvider>
+      </MetaMaskUIProvider>
     </WagmiConfig>
   );
 }
