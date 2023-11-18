@@ -1,8 +1,11 @@
 'use client';
 
 import Button from '@/components/button/button';
+import { factoryAbi } from '@/utils/Abi';
 import { useSDK } from '@metamask/sdk-react';
 import { useState } from 'react';
+import { writeContract, waitForTransaction } from 'wagmi/actions';
+import { useAccount } from 'wagmi';
 
 // Liked tracks with more realistic song names and artist names
 const likedTracks = [
@@ -69,9 +72,8 @@ const EventItem = ({ name, description, heartsUsed }: any) => (
 );
 
 export default function MyTune() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const { sdk, connected, connecting, provider, chainId } = useSDK();
+  const { address, isError, isLoading } = useAccount();
 
   const connect = async () => {
     console.log('connect');
@@ -83,17 +85,23 @@ export default function MyTune() {
     }
   };
 
-  function handleMintTokens() {
+  async function handleMintTokens() {
     if (!connected) {
       alert('Please connect your wallet first!');
       return;
     }
 
-    setIsLoading(true);
+    console.log('account', address);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    /* const name = 'MetaTune';
+    const { hash } = await writeContract({
+      address: '0x71cAd28C784BD5C058E229C78A1D45703d37e13d',
+      abi: factoryAbi,
+      functionName: 'createToken',
+      args: [, 'SRH', 100],
+    });
+    const data = await waitForTransaction({ hash });
+    console.log(data); */
   }
 
   return (
@@ -107,7 +115,7 @@ export default function MyTune() {
         </div>
 
         <Button variant="primary" extra="mt-2 text-sm" onClick={handleMintTokens}>
-          {connected ? 'Mint Tokens' : 'Connect Wallet'}
+          Mint Tokens
         </Button>
       </div>
 
