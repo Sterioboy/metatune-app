@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function useChainChangeHandler() {
   useEffect(() => {
     // Define the handler function for chain changes
-    function handleChainChanged(chainId) {
+    function handleChainChanged() {
       // We recommend reloading the page, unless you must do otherwise.
       window.location.reload();
     }

@@ -1,5 +1,6 @@
 'use client';
 
+import Navbar from '@/components/navbar/navbar';
 import useChainChangeHandler from '@/hooks/useChainChangeHandler';
 import { MetaMaskUIProvider } from '@metamask/sdk-react-ui';
 
