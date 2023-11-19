@@ -21,7 +21,7 @@ export default function MainLayout({ children }: any) {
     checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
     dappMetadata: {
       name: 'Demo React App',
-      url: window.location.host,
+      url: typeof window !== 'undefined' ? window.location.host : undefined,
     },
   };
 
