@@ -80,49 +80,29 @@ export default function MyTune() {
       return;
     }
 
-    const address = await sdk?.connect();
+    const address: any = await sdk?.connect();
 
     console.log('sdk');
     console.log('address', address[0]);
 
-    const eth_requestAccounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    });
+    if (window.ethereum) {
+      const eth_requestAccounts: any = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-    let txHash = await window.ethereum.request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: eth_requestAccounts[0],
-          to: '0x51cFe6e6Bb7E7Be72503343aea7238aC6136EE67',
-          value: '100000000000', // 1 wei
-        },
-      ],
-    });
+      let txHash = await window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            from: eth_requestAccounts[0],
+            to: '0x51cFe6e6Bb7E7Be72503343aea7238aC6136EE67',
+            value: '100000000000', // 1 wei
+          },
+        ],
+      });
 
-    console.log('txHash', txHash);
-
-    /* console.log('eth_requestAccounts', eth_requestAccounts);
-
-    const exampleMessage = 'Example `personal_sign` message.';
-
-    const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
-    const sign = await window.ethereum.request({
-      method: 'personal_sign',
-      params: [msg, eth_requestAccounts[0]],
-    });
-
-    console.log('sign', sign); */
-
-    /* const name = 'MetaTune';
-    const { hash } = await writeContract({
-      address: '0x71cAd28C784BD5C058E229C78A1D45703d37e13d',
-      abi: factoryAbi,
-      functionName: 'createToken',
-      args: [address[0], 100],
-    });
-    const data = await waitForTransaction({ hash });
-    console.log(data); */
+      console.log('txHash', txHash);
+    }
   }
 
   return (
