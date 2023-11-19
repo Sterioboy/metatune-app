@@ -85,80 +85,34 @@ export default function MyTune() {
     console.log('sdk');
     console.log('address', address[0]);
 
-    await window.ethereum.request({
+    const eth_requestAccounts = await window.ethereum.request({
       method: 'eth_requestAccounts',
     });
 
-    await window.ethereum.request({
-      method: 'eth_signTypedData_v4',
+    let txHash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
       params: [
-        '0x0000000000000000000000000000000000000000',
         {
-          types: {
-            EIP712Domain: [
-              {
-                name: 'name',
-                type: 'string',
-              },
-              {
-                name: 'version',
-                type: 'string',
-              },
-              {
-                name: 'chainId',
-                type: 'uint256',
-              },
-              {
-                name: 'verifyingContract',
-                type: 'address',
-              },
-            ],
-            Person: [
-              {
-                name: 'name',
-                type: 'string',
-              },
-              {
-                name: 'wallet',
-                type: 'address',
-              },
-            ],
-            Mail: [
-              {
-                name: 'from',
-                type: 'Person',
-              },
-              {
-                name: 'to',
-                type: 'Person',
-              },
-              {
-                name: 'contents',
-                type: 'string',
-              },
-            ],
-          },
-          primaryType: 'Mail',
-          domain: {
-            name: 'Ether Mail',
-            version: '1',
-            chainId: 1,
-            verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-          },
-          message: {
-            from: {
-              name: 'Cow',
-              wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-            },
-            to: {
-              name: 'Bob',
-              wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-            },
-            contents: 'Hello, Bob!',
-          },
+          from: eth_requestAccounts[0],
+          to: '0x51cFe6e6Bb7E7Be72503343aea7238aC6136EE67',
+          value: '100000000000', // 1 wei
         },
       ],
     });
+
+    console.log('txHash', txHash);
+
+    /* console.log('eth_requestAccounts', eth_requestAccounts);
+
+    const exampleMessage = 'Example `personal_sign` message.';
+
+    const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
+    const sign = await window.ethereum.request({
+      method: 'personal_sign',
+      params: [msg, eth_requestAccounts[0]],
+    });
+
+    console.log('sign', sign); */
 
     /* const name = 'MetaTune';
     const { hash } = await writeContract({
