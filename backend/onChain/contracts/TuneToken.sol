@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract TuneToken is ERC20, ERC20Burnable, Ownable {
     constructor() ERC20("TuneToken", "TUNE") Ownable(){}
 
+    receive() external payable {}
+
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
