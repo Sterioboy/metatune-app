@@ -1,9 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAccount } from 'wagmi'
 
-// You would typically fetch this data from a backend or state management store
 const leaderboardData = [
   { id: 1, trackName: 'Increase Project Nice', artistName: 'Victoria Clements', movement: 3 },
   { id: 2, trackName: 'Not Always Like', artistName: 'Brian White', movement: -1 },
@@ -35,10 +33,6 @@ const LeaderboardItem = ({ rank, trackName, artistName, movement }: any) => {
 };
 
 export default function Leaderboard() {
-  const { address } = useAccount()
-
-  console.log(address)
-
   return (
     <div>
       <h2 className="text-center text-2xl font-bold mb-4">Leaderboard</h2>
