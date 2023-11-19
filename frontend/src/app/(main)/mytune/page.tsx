@@ -2,9 +2,10 @@
 
 import Button from '@/components/button/button';
 import { factoryAbi } from '@/utils/Abi';
+import writeToContract from '@/utils/writeToContract';
 import { useSDK } from '@metamask/sdk-react-ui';
-import { useAccount } from 'wagmi';
 import { useState } from 'react';
+import { waitForTransaction, writeContract } from 'wagmi/actions';
 
 // Liked tracks with more realistic song names and artist names
 const likedTracks = [
@@ -73,21 +74,98 @@ const EventItem = ({ name, description, heartsUsed }: any) => (
 export default function MyTune() {
   const { sdk, connected, connecting, provider, chainId } = useSDK();
 
-  const { address, isConnecting, isDisconnected } = useAccount();
-
   async function handleMintTokens() {
     if (!connected) {
       alert('Please connect your wallet first!');
       return;
     }
-    console.log('address', address);
+
+    const address = await sdk?.connect();
+
+    console.log('sdk');
+    console.log('address', address[0]);
+
+    await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    await window.ethereum.request({
+      method: 'eth_signTypedData_v4',
+      params: [
+        '0x0000000000000000000000000000000000000000',
+        {
+          types: {
+            EIP712Domain: [
+              {
+                name: 'name',
+                type: 'string',
+              },
+              {
+                name: 'version',
+                type: 'string',
+              },
+              {
+                name: 'chainId',
+                type: 'uint256',
+              },
+              {
+                name: 'verifyingContract',
+                type: 'address',
+              },
+            ],
+            Person: [
+              {
+                name: 'name',
+                type: 'string',
+              },
+              {
+                name: 'wallet',
+                type: 'address',
+              },
+            ],
+            Mail: [
+              {
+                name: 'from',
+                type: 'Person',
+              },
+              {
+                name: 'to',
+                type: 'Person',
+              },
+              {
+                name: 'contents',
+                type: 'string',
+              },
+            ],
+          },
+          primaryType: 'Mail',
+          domain: {
+            name: 'Ether Mail',
+            version: '1',
+            chainId: 1,
+            verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+          },
+          message: {
+            from: {
+              name: 'Cow',
+              wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+            },
+            to: {
+              name: 'Bob',
+              wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+            },
+            contents: 'Hello, Bob!',
+          },
+        },
+      ],
+    });
 
     /* const name = 'MetaTune';
     const { hash } = await writeContract({
       address: '0x71cAd28C784BD5C058E229C78A1D45703d37e13d',
       abi: factoryAbi,
       functionName: 'createToken',
-      args: [accounts[0], 100],
+      args: [address[0], 100],
     });
     const data = await waitForTransaction({ hash });
     console.log(data); */
