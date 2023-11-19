@@ -2,9 +2,7 @@
 
 import Button from '@/components/button/button';
 import { factoryAbi } from '@/utils/Abi';
-import writeToContract from '@/utils/writeToContract';
 import { useSDK } from '@metamask/sdk-react-ui';
-import { useState } from 'react';
 import { waitForTransaction, writeContract } from 'wagmi/actions';
 
 // Liked tracks with more realistic song names and artist names
